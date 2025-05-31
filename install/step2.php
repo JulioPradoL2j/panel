@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <title>Instalação - Etapa 2</title>
 <link rel="stylesheet" href="assets/style.css">
+<link rel="shortcut icon" href="../icon/favicon.png">
 <script>
 function toggleInput(id, checkbox) {
     document.getElementById(id).style.display = checkbox.checked ? 'block' : 'none';

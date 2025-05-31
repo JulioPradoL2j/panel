@@ -126,6 +126,7 @@ function flush_echo($str) {
 <meta charset="UTF-8">
 <title>Finalizando Instalação</title>
 <link rel="stylesheet" href="assets/style.css">
+<link rel="shortcut icon" href="../icon/favicon.png">
 </head>
 <body class="dark">
 <div class="install-container">

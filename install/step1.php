@@ -10,6 +10,7 @@ if (file_exists('./includes/config.php')) {
 <meta charset="UTF-8">
 <title>Instalação - Etapa 1</title>
 <link rel="stylesheet" href="assets/style.css">
+<link rel="shortcut icon" href="../icon/favicon.png">
 <script>
 function validateForm() {
     const host = document.forms["installForm"]["db_host"].value.trim();
