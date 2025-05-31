@@ -64,9 +64,13 @@ $currentCaptcha = $captcha->getCurrentCaptcha();
 
 
       <button type="submit">Login</button>
+
       <?php if ($error): ?>
         <p class="error"><?= htmlspecialchars($error) ?></p>
       <?php endif; ?>
+	  
+	   <p class="register-link">Don't have an account yet? <a href="register.php">Register here</a></p>
+
     </form>
   </div>
   <script>

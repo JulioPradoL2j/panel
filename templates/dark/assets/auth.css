@@ -27,10 +27,10 @@ body::after {
 .login-container {
   position: relative;
   z-index: 1;
-  width: 420px;
+  width: 450px;
   max-width: 95vw;
   margin: auto;
-  top: 40%;
+  top: 48%;
   transform: translateY(-50%);
   background: rgba(24, 20, 20, 0.92);
   border-radius: 18px;
@@ -146,4 +146,26 @@ body::after {
 }
 input[name="captcha"] {
   text-transform: uppercase;
+}
+.register-link {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.register-link a {
+  color: #eec889;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+  color: #f6d99b;
+}
+.success {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #73ff7c;
+  font-weight: 600;
 }
