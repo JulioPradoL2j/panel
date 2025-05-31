@@ -37,8 +37,8 @@ function toggleInput(id, checkbox) {
 <div class="install-container">
     <h1>Configurações do Site</h1>
     <form method="post" action="finish.php">
-        <label for="site_url">URL do site (ex: https://l2fun.com):</label>
-        <input type="text" id="site_url" name="site_url" placeholder="https://seusite.com" required>
+        <label for="site_url">URL do site (ex: https://seudominio.com):</label>
+        <input type="text" id="site_url" name="site_url" placeholder="https://seudominio.com" required>
 
         <label for="theme">Tema:</label>
         <select id="theme" name="theme" required>
