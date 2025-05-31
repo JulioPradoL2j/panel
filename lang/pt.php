@@ -58,7 +58,7 @@ return [
         'pkkills' => 'Kills PK',
         'online' => 'Online',
         'onlinetime' => 'Tempo Online',
-        'hero' => 'Herói',
+        'vip' => 'Premium',
         'nobles' => 'Nobre',
         'race' => 'Raça',
         'class' => 'Classe'

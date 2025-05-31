@@ -43,14 +43,14 @@ if ($username) {
 
     $stmt->close();
 
-    // Consulta do access_level
-    $stmt = $conn->prepare("SELECT access_level FROM accounts WHERE login = ?");
+    // Consulta do accesslevel
+    $stmt = $conn->prepare("SELECT accesslevel FROM accounts WHERE login = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        $_SESSION['access_level'] = (int)$row['access_level'];
+        $_SESSION['accesslevel'] = (int)$row['accesslevel'];
     }
 
     $stmt->close();
@@ -61,9 +61,7 @@ if ($username) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>
-  window.USER_ACCESS_LEVEL = <?= isset($_SESSION['access_level']) ? (int)$_SESSION['access_level'] : 0 ?>;
-</script>
+
 
 
 	  <meta charset="UTF-8" />
@@ -73,10 +71,14 @@ if ($username) {
 	  <link rel="shortcut icon" href="icon/favicon.png">
 	  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-	  <script src="../admin_button.js"></script>
+	  <script src="admin_button.js"></script>
 
 	</head>
 	<body>
+<script>
+  window.USER_ACCESS_LEVEL = <?= isset($_SESSION['accesslevel']) ? (int)$_SESSION['accesslevel'] : 0 ?>;
+</script>
+
 	  <div class="container">
 		<aside class="sidebar">
 		  <div class="profile">
@@ -115,7 +117,7 @@ if ($username) {
 			$conn = getDbConnection();
 			$login = $conn->real_escape_string($_SESSION['username']);
 		
-			$sql = "SELECT char_name, level, title, sex, exp, sp, karma, pvpkills, pkkills, online, onlinetime, hero, nobless, race, classid FROM characters WHERE account_name = '$login' ORDER BY char_slot ASC LIMIT 7";
+			$sql = "SELECT char_name, level, title, sex, exp, sp, karma, pvpkills, pkkills, online, onlinetime, vip, nobless, race, classid FROM characters WHERE account_name = '$login' ORDER BY char_slot ASC LIMIT 7";
 
 			$result = $conn->query($sql);
 		
@@ -141,7 +143,7 @@ if ($username) {
 						data-pkkills='{$char['pkkills']}'
 						data-online='{$char['online']}'
 						data-onlinetime='{$char['onlinetime']}'
-						data-hero='{$char['hero']}'
+						data-vip='{$char['vip']}'
 						data-nobless='{$char['nobless']}'
 						data-race='{$raceName}'
 						data-classid='{$char['classid']}'>
@@ -173,7 +175,7 @@ if ($username) {
 		<div><strong><?= $lang['char_info']['pkkills'] ?>:</strong> <span id="charPk">—</span></div>
 		<div><strong><?= $lang['char_info']['online'] ?>:</strong> <span id="charOnline">—</span></div>
 		<div><strong><?= $lang['char_info']['onlinetime'] ?>:</strong> <span id="charOnlineTime">—</span></div>
-		<div><strong><?= $lang['char_info']['hero'] ?>:</strong> <span id="charHero">—</span></div>
+		<div><strong><?= $lang['char_info']['vip'] ?>:</strong> <span id="charVip">—</span></div>
 		<div><strong><?= $lang['char_info']['nobles'] ?>:</strong> <span id="charNobles">—</span></div>
 		<div><strong><?= $lang['char_info']['race'] ?>:</strong> <span id="charRace">—</span></div>
 		<div><strong><?= $lang['char_info']['class'] ?>:</strong> <span id="charClass">—</span></div>
@@ -214,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const charPk = document.getElementById("charPk");
   const charOnline = document.getElementById("charOnline");
   const charOnlineTime = document.getElementById("charOnlineTime");
-  const charHero = document.getElementById("charHero");
+  const charHero = document.getElementById("charVip");
   const charNobles = document.getElementById("charNobles");
   const charRace = document.getElementById("charRace");
 
@@ -235,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     charPk.textContent = card.dataset.pkkills;
     charOnline.textContent = card.dataset.online === "1" ? "Online" : "Offline";
     charOnlineTime.textContent = formatTime(card.dataset.onlinetime);
-    charHero.textContent = card.dataset.hero === "1" ? "Sim" : "Não";
+    charVip.textContent = card.dataset.vip === "1" ? "Sim" : "Não";
     charNobles.textContent = card.dataset.nobless === "1" ? "Sim" : "Não";
     charRace.textContent = card.dataset.race;
  const classId = parseInt(card.dataset.classid);

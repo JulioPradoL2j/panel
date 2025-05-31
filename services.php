@@ -46,14 +46,14 @@ if ($username) {
 
     $stmt->close();
 
-    // Consulta do access_level
-    $stmt = $conn->prepare("SELECT access_level FROM accounts WHERE login = ?");
+    // Consulta do accesslevel
+    $stmt = $conn->prepare("SELECT accesslevel FROM accounts WHERE login = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        $_SESSION['access_level'] = (int)$row['access_level'];
+        $_SESSION['accesslevel'] = (int)$row['accesslevel'];
     }
 
     $stmt->close();
@@ -87,16 +87,14 @@ $raceMap = ['Humano', 'Elfo', 'DarkElf', 'Orc', 'Drawn'];
 <!DOCTYPE html>
 <html lang="<?= $_SESSION['lang'] ?>">
 <head>
-<script>
-  window.USER_ACCESS_LEVEL = <?= isset($_SESSION['access_level']) ? (int)$_SESSION['access_level'] : 0 ?>;
-</script>
+
     <meta charset="UTF-8">
     <title>Painel UCP - Lineage II</title>
     <link rel="stylesheet" href="templates/dark/assets/auth.css" />
     <link rel="stylesheet" href="templates/dark/assets/dark.css" />
     <link rel="shortcut icon" href="icon/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
-	<script src="../admin_button.js"></script>
+	<script src="admin_button.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
@@ -186,6 +184,9 @@ $raceMap = ['Humano', 'Elfo', 'DarkElf', 'Orc', 'Drawn'];
 
 </head>
 <body>
+<script>
+  window.USER_ACCESS_LEVEL = <?= isset($_SESSION['accesslevel']) ? (int)$_SESSION['accesslevel'] : 0 ?>;
+</script>
 <div class="container">
     <aside class="sidebar">
         <div class="profile">

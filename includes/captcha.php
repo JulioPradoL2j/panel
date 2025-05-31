@@ -2,7 +2,7 @@
 class Captcha {
     private $session;
     private $ip;
-    private $expirationTime = 60; // 60 segundos
+    private $expirationTime = 120; // 60 segundos
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {

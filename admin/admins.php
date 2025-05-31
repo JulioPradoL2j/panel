@@ -25,9 +25,9 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
     exit;
 }
 
-// Verificação de access_level (1 = Admin, 2 = GM)
+// Verificação de accesslevel (1 = Admin, 2 = GM)
 $login = $_SESSION['username'] ?? '';
-$stmt = $conn->prepare("SELECT access_level FROM accounts WHERE login = ?");
+$stmt = $conn->prepare("SELECT accesslevel FROM accounts WHERE login = ?");
 $stmt->bind_param("s", $login);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -38,7 +38,7 @@ if ($result->num_rows === 0) {
 }
 
 $user = $result->fetch_assoc();
-if (!in_array($user['access_level'], [1, 2])) {
+if (!in_array($user['accesslevel'], [1, 2])) {
     header("Location: ../index.php");
     exit;
 }
@@ -62,14 +62,14 @@ if ($username) {
     $stmt->close();
 }
 
-$accessLevel = (int) $user['access_level'];
+$accessLevel = (int) $user['accesslevel'];
 
 // Alteração de nível de acesso
-if ($accessLevel == 1 && isset($_POST['alterarNivel'], $_POST['login'], $_POST['access_level'])) {
+if ($accessLevel == 1 && isset($_POST['alterarNivel'], $_POST['login'], $_POST['accesslevel'])) {
     $login = $_POST['login'];
-    $novoNivel = (int)$_POST['access_level'];
+    $novoNivel = (int)$_POST['accesslevel'];
 
-    $stmt = $conn->prepare("UPDATE accounts SET access_level = ? WHERE login = ?");
+    $stmt = $conn->prepare("UPDATE accounts SET accesslevel = ? WHERE login = ?");
     $stmt->bind_param("is", $novoNivel, $login);
     $stmt->execute();
     $stmt->close();
@@ -169,7 +169,7 @@ button:hover {
     <div class="admin-panel">
         <aside class="admin-sidebar">
             <div class="admin-header">
-                <div class="admin-user"><i class="fa fa-user-friends"></i> <?= $user['access_level'] == 1 ? 'Admin' : 'GM' ?></div>
+                <div class="admin-user"><i class="fa fa-user-friends"></i> <?= $user['accesslevel'] == 1 ? 'Admin' : 'GM' ?></div>
 				 <span class="admin-balance"><?= $lang['saldo'] ?> R$ <?= number_format($saldo, 2, ',', '.') ?></span>
             
             </div>
@@ -218,7 +218,7 @@ $stmt->close();
 $totalPaginas = ceil($totalRegistros / $porPagina);
 
 // Buscar os dados paginados
-$stmt = $conn->prepare("SELECT login, lastactive, access_level FROM accounts WHERE login LIKE ? ORDER BY login ASC LIMIT ? OFFSET ?");
+$stmt = $conn->prepare("SELECT login, lastactive, accesslevel FROM accounts WHERE login LIKE ? ORDER BY login ASC LIMIT ? OFFSET ?");
 $stmt->bind_param("sii", $filtroSQL, $porPagina, $offset);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -252,7 +252,7 @@ $stmt->close();
 
                 <td>
                     <?php
-                        switch ($conta['access_level']) {
+                        switch ($conta['accesslevel']) {
                             case 1: echo 'Admin'; break;
                             case 2: echo 'GM'; break;
                             default: echo 'Jogador'; break;
@@ -263,10 +263,10 @@ $stmt->close();
                 <td>
                     <form method="post" action="admins.php" style="display:inline;">
                         <input type="hidden" name="login" value="<?= $conta['login'] ?>">
-                        <select name="access_level">
-                            <option value="0" <?= $conta['access_level'] == 0 ? 'selected' : '' ?>>Jogador</option>
-                            <option value="1" <?= $conta['access_level'] == 1 ? 'selected' : '' ?>>Admin</option>
-                            <option value="2" <?= $conta['access_level'] == 2 ? 'selected' : '' ?>>GM</option>
+                        <select name="accesslevel">
+                            <option value="0" <?= $conta['accesslevel'] == 0 ? 'selected' : '' ?>>Jogador</option>
+                            <option value="1" <?= $conta['accesslevel'] == 1 ? 'selected' : '' ?>>Admin</option>
+                            <option value="2" <?= $conta['accesslevel'] == 2 ? 'selected' : '' ?>>GM</option>
                         </select>
                         <button type="submit" name="alterarNivel" style="background-color: #f5c261; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Salvar</button>
                     </form>

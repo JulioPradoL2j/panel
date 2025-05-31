@@ -1,7 +1,7 @@
 <?php
 return [
     'db_host' => '127.0.0.1',
-    'db_name' => 'l2jfaction',
+    'db_name' => 'l2jdb',
     'db_user' => 'root',
     'db_pass' => 'root',
     'project' => 'L2JDreamV2',

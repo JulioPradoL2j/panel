@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.innerText = access === 1 ? "Painel Admin" : "Painel GM";
 
     btn.onclick = () => {
-      window.location.href = "./admin/index.php";
+      window.location.href = "admin/index.php";
     };
 
     document.body.appendChild(btn);

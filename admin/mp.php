@@ -43,13 +43,13 @@ if ($login) {
     $stmt->close();
 }
 
-$stmt = $conn->prepare("SELECT access_level FROM accounts WHERE login = ?");
+$stmt = $conn->prepare("SELECT accesslevel FROM accounts WHERE login = ?");
 $stmt->bind_param("s", $login);
 $stmt->execute();
 $res = $stmt->get_result();
 if ($res->num_rows === 0) exit;
 $user = $res->fetch_assoc();
-$accessLevel = (int) $user['access_level'];
+$accessLevel = (int) $user['accesslevel'];
 if (!in_array($accessLevel, [1, 2])) exit;
 
 // Ações: entregar ou cancelar
@@ -248,7 +248,7 @@ document.getElementById('filtro').addEventListener('input', function () {
     <div class="admin-panel">
         <aside class="admin-sidebar">
             <div class="admin-header">
-                <div class="admin-user"><i class="fa fa-user-friends"></i> <?= $user['access_level'] == 1 ? 'Admin' : 'GM' ?></div>
+                <div class="admin-user"><i class="fa fa-user-friends"></i> <?= $user['accesslevel'] == 1 ? 'Admin' : 'GM' ?></div>
 				 <span class="admin-balance"><?= $lang['saldo'] ?> R$ <?= number_format($saldo, 2, ',', '.') ?></span>
             
             </div>

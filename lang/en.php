@@ -60,7 +60,7 @@ return [
 		'pkkills' => 'PK Kills',
 		'online' => 'Online',
 		'onlinetime' => 'Online Time',
-		'hero' => 'Hero',
+		'vip' => 'Vip',
 		'nobles' => 'Noblesse',
 		'race' => 'Race',
 		'class' => 'Class'
