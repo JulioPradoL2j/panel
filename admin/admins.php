@@ -245,7 +245,7 @@ $stmt->close();
                 <td style="padding: 10px;"><?= htmlspecialchars($conta['login']) ?></td>
                 <td>
 					<?php
-						$timestamp = (int)($conta['lastactive'] / 1000); // converte de milissegundos para segundos
+						$timestamp = (int)($conta['lastactive']);
 						echo date('H:i d/m/Y', $timestamp);
 					?>
 				</td>

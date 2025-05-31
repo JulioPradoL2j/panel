@@ -8,7 +8,7 @@ $conn = getDbConnection();
 if (!isset($_SESSION['lang'])) $_SESSION['lang'] = 'pt';
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['pt', 'en'])) {
     $_SESSION['lang'] = $_GET['lang'];
-    header("Location: donates.php");
+    header("Location: mp.php");
     exit;
 }
 $lang = include "../lang/{$_SESSION['lang']}.php";
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['id'
     $stmt->close();
 
     if ($alreadyProcessed) {
-        header("Location: donates.php?msg=already_processed");
+        header("Location: mp.php?msg=already_processed");
         exit;
     }
 
@@ -131,7 +131,7 @@ elseif ($_POST['action'] === 'cancel_payment') {
 
     if (!$paymentId || $status !== 'pending') {
         // Ignorar se não encontrado ou não estiver pendente
-        header("Location: donates.php?msg=invalid_status");
+        header("Location: mp.php?msg=invalid_status");
         exit;
     }
 
@@ -159,15 +159,15 @@ elseif ($_POST['action'] === 'cancel_payment') {
         $stmt->execute();
         $stmt->close();
 
-        header("Location: donates.php?msg=cancel_success");
+        header("Location: mp.php?msg=cancel_success");
         exit;
     } else {
-        header("Location: donates.php?msg=cancel_failed");
+        header("Location: mp.php?msg=cancel_failed");
         exit;
     }
 }
 
-    header("Location: donates.php?filtro=" . urlencode($_GET['filtro'] ?? '') . "&page=" . ($_GET['page'] ?? 1));
+    header("Location: mp.php?filtro=" . urlencode($_GET['filtro'] ?? '') . "&page=" . ($_GET['page'] ?? 1));
     exit;
 }
 
