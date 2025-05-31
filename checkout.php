@@ -126,7 +126,7 @@ if ($username) {
 			$conn = getDbConnection();
 			$login = $conn->real_escape_string($_SESSION['username']);
 		
-			$sql = "SELECT char_name, level, title, sex, exp, sp, karma, pvpkills, pkkills, online, onlinetime, hero, nobless, race, classid FROM characters WHERE account_name = '$login' ORDER BY char_slot ASC LIMIT 7";
+			$sql = "SELECT char_name, level, title, sex, exp, sp, karma, pvpkills, pkkills, online, onlinetime, vip, nobless, race, classid FROM characters WHERE account_name = '$login' ORDER BY char_slot ASC LIMIT 7";
 
 			$result = $conn->query($sql);
 		
@@ -152,7 +152,7 @@ if ($username) {
 						data-pkkills='{$char['pkkills']}'
 						data-online='{$char['online']}'
 						data-onlinetime='{$char['onlinetime']}'
-						data-hero='{$char['hero']}'
+						data-vip='{$char['vip']}'
 						data-nobless='{$char['nobless']}'
 						data-race='{$raceName}'
 						data-classid='{$char['classid']}'>

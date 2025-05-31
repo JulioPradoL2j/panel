@@ -7,7 +7,7 @@ return [
     'project' => 'L2JDreamV2',
     'chronicle' => 'interlude',
     'theme' => 'dark',
-    'site_url' => 'https://localhost',
+    'site_url' => 'localhost',
     'use_mercadopago' => true,
     'mercadopago_private_key' => 'APP_USR-790329947985852-030903-b64926c09b74b8fc10a498fc41970b7d-768411501',
     'use_stripe' => true,

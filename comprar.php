@@ -56,7 +56,7 @@ if (!$item || $item['quantity'] <= 0) {
 }
 
 // Buscar personagem
-$stmt = $conn->prepare("SELECT obj_Id, online FROM characters WHERE account_name = ? AND char_name = ?");
+$stmt = $conn->prepare("SELECT charId, online FROM characters WHERE account_name = ? AND char_name = ?");
 $stmt->bind_param("ss", $username, $charName);
 $stmt->execute();
 $stmt->bind_result($charId, $online);
@@ -84,9 +84,9 @@ try {
     $gameItemId = $item['item_id'];
     $quantity = $item['quantity'];
     $stackable = (bool)$item['stackable'];
+    $creationTime = time();
 
     if ($stackable) {
-        // Verifica se o personagem já possui o item
         $stmt = $conn->prepare("SELECT object_id, count FROM items WHERE owner_id = ? AND item_id = ? AND loc = 'INVENTORY' FOR UPDATE");
         $stmt->bind_param("ii", $charId, $gameItemId);
         $stmt->execute();
@@ -95,7 +95,6 @@ try {
         $stmt->close();
 
         if ($hasItem) {
-            // Atualiza quantidade
             $newCount = $existingCount + $quantity;
             $stmt = $conn->prepare("UPDATE items SET count = ? WHERE object_id = ?");
             $stmt->bind_param("ii", $newCount, $existingObjectId);
@@ -104,12 +103,11 @@ try {
             }
             $stmt->close();
         } else {
-            // Insere novo item stackable
             $objectId = generateUniqueObjectId($conn);
             $stmt = $conn->prepare("INSERT INTO items 
-                (owner_id, object_id, item_id, count, enchant_level, loc, loc_data, custom_type1, custom_type2, mana_left, time)
-                VALUES (?, ?, ?, ?, 0, 'INVENTORY', 0, 0, 0, -1, -1)");
-            $stmt->bind_param("iiii", $charId, $objectId, $gameItemId, $quantity);
+                (owner_id, object_id, item_id, count, enchant_level, loc, loc_data, custom_type1, custom_type2, mana_left, attributes, process, creator_id, first_owner_id, creation_time, data) 
+                VALUES (?, ?, ?, ?, 0, 'INVENTORY', 0, 0, 0, -1, '', 'shop', ?, ?, ?, '')");
+            $stmt->bind_param("iiiiiii", $charId, $objectId, $gameItemId, $quantity, $charId, $charId, $creationTime);
             if (!$stmt->execute()) {
                 throw new Exception("Erro ao inserir item stackable.");
             }
@@ -117,13 +115,12 @@ try {
         }
 
     } else {
-        // Insere item não empilhável, um por um
         for ($i = 0; $i < $quantity; $i++) {
             $objectId = generateUniqueObjectId($conn);
             $stmt = $conn->prepare("INSERT INTO items 
-                (owner_id, object_id, item_id, count, enchant_level, loc, loc_data, custom_type1, custom_type2, mana_left, time)
-                VALUES (?, ?, ?, 1, 0, 'INVENTORY', 0, 0, 0, -1, -1)");
-            $stmt->bind_param("iii", $charId, $objectId, $gameItemId);
+                (owner_id, object_id, item_id, count, enchant_level, loc, loc_data, custom_type1, custom_type2, mana_left, attributes, process, creator_id, first_owner_id, creation_time, data) 
+                VALUES (?, ?, ?, 1, 0, 'INVENTORY', 0, 0, 0, -1, '', 'shop', ?, ?, ?, '')");
+            $stmt->bind_param("iiiiiii", $charId, $objectId, $gameItemId, $charId, $charId, $creationTime);
             if (!$stmt->execute()) {
                 throw new Exception("Erro ao inserir item não stackable.");
             }
@@ -131,7 +128,6 @@ try {
         }
     }
 
-    // Deduz saldo
     $stmt = $conn->prepare("UPDATE account_balance SET balance = balance - ? WHERE login = ?");
     $stmt->bind_param("ds", $item['price'], $username);
     if (!$stmt->execute()) {

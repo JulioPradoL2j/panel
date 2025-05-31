@@ -14,8 +14,8 @@ body.dark {
 
 /* Container centralizado para o instalador */
 .install-container {
-    max-width: 800px;
-    margin: 60px auto;
+    max-width: 100%;
+    margin: -30px auto;
     background-color: #1e1e1e;
     border: 1px solid #3a3a3a;
     border-radius: 12px;
@@ -26,7 +26,7 @@ body.dark {
 /* Título da etapa */
 .install-container h1 {
     text-align: center;
-    font-size: 1.8em;
+    font-size: 12px;
     margin-bottom: 25px;
     color: #f8d15b;
 }
