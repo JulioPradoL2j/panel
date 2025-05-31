@@ -1,0 +1,131 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fundo escuro com tipografia legível */
+body.dark {
+    background-color: #121212;
+    color: #f0e6d2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container centralizado para o instalador */
+.install-container {
+    max-width: 800px;
+    margin: 60px auto;
+    background-color: #1e1e1e;
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Título da etapa */
+.install-container h1 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #f8d15b;
+}
+
+/* Rótulos dos campos */
+.install-container label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #f0e6d2;
+}
+
+/* Campos de input e select */
+.install-container input[type="text"],
+.install-container input[type="password"],
+.install-container select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    background-color: #262626;
+    color: #f0e6d2;
+    font-size: 14px;
+}
+
+.install-container input::placeholder {
+    color: #a9a9a9;
+}
+
+/* Checkbox alinhado com texto */
+.install-container input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+/* Separador entre seções */
+.install-container hr {
+    margin: 30px 0;
+    border-color: #444;
+}
+
+/* Botão de submissão */
+.install-container button[type="submit"] {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #f8d15b;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.install-container button[type="submit"]:hover {
+    background-color: #eac645;
+}
+
+/* Área de progresso da instalação */
+#progress {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d9d9d9;
+}
+
+/* Seção de valores de doação e bônus */
+.install-container .donation-section,
+.install-container .bonus-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+}
+
+/* Inputs numéricos */
+.install-container input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    background-color: #262626;
+    color: #f0e6d2;
+    font-size: 14px;
+}
+
+/* Subtítulo visual para separar as seções */
+.install-container .section-title {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #f8d15b;
+    border-bottom: 1px solid #444;
+    padding-bottom: 4px;
+}

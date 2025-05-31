@@ -1,0 +1,149 @@
+body, html {
+  height: 100%;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to bottom, #111111 0%, #1b110e 100%);
+  overflow: hidden;
+  color: #eee;
+}
+
+/* Fundo com leve partícula/fumaça */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 210, 170, 0.02), transparent 60%),
+              radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.04), transparent 50%);
+  animation: smokeMove 45s linear infinite;
+  z-index: 0;
+}
+body::after {
+  animation-delay: 20s;
+  filter: blur(60px);
+}
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 420px;
+  max-width: 95vw;
+  margin: auto;
+  top: 40%;
+  transform: translateY(-50%);
+  background: rgba(24, 20, 20, 0.92);
+  border-radius: 18px;
+  padding: 50px 40px;
+  box-shadow: 0 0 35px rgba(255, 191, 115, 0.15);
+  text-align: center;
+  animation: floatUpDown 10s ease-in-out infinite;
+}
+
+.login-container .logo {
+  max-width: 200px;
+  margin: 0 auto -30px auto;
+  display: block;
+  animation: fadeIn 2.5s ease;
+
+}
+
+.login-container h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  color: #eec889;
+  margin-bottom: 25px;
+}
+
+.login-container button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #eac27a, #d89f4d);
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.login-container button:hover {
+  background: linear-gradient(to right, #f4d9a6, #c48b3e);
+  box-shadow: 0 0 12px #eac27a;
+}
+
+.login-container .error {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #ff4d4d;
+  font-weight: 600;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(calc(-50% + 10px)) translateX(3px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes smokeMove {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(15%, 15%) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.input-group {
+  position: relative;
+  margin: 14px 0;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.1rem;
+}
+
+.input-group input {
+  width: 85%;
+  padding: 14px 18px 14px 45px; /* espaço para o ícone */
+  font-size: 1.1rem;
+  border: 1px solid #3a2e2a;
+  border-radius: 10px;
+  background: #191717;
+  color: #eee;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  background: #26221f;
+  border-color: #eec889;
+  box-shadow: 0 0 10px rgba(255, 204, 102, 0.25);
+  outline: none;
+}
+
+.captcha-display {
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 4px;
+  margin-top: 10px;
+  background: #111;
+  border: 1px dashed #777;
+  padding: 12px;
+  border-radius: 10px;
+  color: #eec889;
+  user-select: none;
+  text-align: center;
+}
+input[name="captcha"] {
+  text-transform: uppercase;
+}
